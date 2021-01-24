@@ -3,6 +3,13 @@ This is the repository for the LinkedIn Learning course `course-name`. The full 
 
 ![course-name-alt-text][lil-thumbnail-url] 
 
+Design patterns are an important part of programming. Rather than programming solutions to every issue from scratch, developers can implement these patterns that solve common problems. In this course, instructor Richard Goforth explains the purpose and effective use of key design patterns in C#. Richard begins by discussing why design patterns make sense, what they are, and how they are grouped and categorized. He then provides an overview of the creational, behavioral, and structural Gang of Four design patterns and how they are applied in C# and .NET. Next, he takes a deeper dive into the Observer, Builder, Command, Proxy, and Chain of Responsibility Patterns providing hands-on challenges that help you master the application of these patterns in your own code.
+
+There are several applicaitons in this repository.  Carried from the first part of the course are simple console examples in the folders Iterator, Adapter, and Factory.  There are similar folders for the patterns covered in this course, Observer, Builder, Command, Proxy, and ChainOfResponsibility. 
+
+Another application, HPlusSports, is a sample of a more robust web application in ASP.Net core, to give a different example of using each of the patterns in a more realistic situation.  It is more complex than an application of similar functionality would be to show examples of architecture in a more fully featured, long term support application.
+The web application is using an EF Core Backend to a SQLite Database file, to simplify running the application locally.
+
 _See the readme file in the main branch for updated instructions and information._
 ## Instructions
 This repository has branches for each of the videos in the course. You can use the branch pop up menu in github to switch to a specific branch and take a look at the course at that stage, or you can add `/tree/BRANCH_NAME` to the URL to go to the branch you want to access.
@@ -17,6 +24,13 @@ Some branches will have a beginning and an end state. These are marked with the 
 2. Clone this repository into your local machine using the terminal (Mac), CMD (Windows), or a GUI tool like SourceTree.
 3. [Course-specific instructions]
 
+### Instructor
+
+**Richard Goforth**
+
+_Software Architect and Consultant_
+
+Check out some of my other courses on [LinkedIn Learning](https://www.linkedin.com/learning/instructors/richard-goforth).
 
 [0]: # (Replace these placeholder URLs with actual course URLs)
 
