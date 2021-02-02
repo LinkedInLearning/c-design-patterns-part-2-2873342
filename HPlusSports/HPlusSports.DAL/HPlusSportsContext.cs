@@ -39,7 +39,7 @@ namespace HPlusSports.DAL
             modelBuilder.Entity<Order>(entity =>
             {
                 entity.HasIndex(e => e.OrderDate)
-                    .HasName("IX_Order");
+                    .HasDatabaseName("IX_Order");
 
                 entity.Property(e => e.Id).HasColumnName("OrderID");
 
@@ -126,7 +126,7 @@ namespace HPlusSports.DAL
             modelBuilder.Entity<SalesGroup>(entity =>
             {
                 entity.HasIndex(e => new { e.State, e.Type })
-                    .HasName("IX_StateType")
+                    .HasDatabaseName("IX_StateType")
                     .IsUnique();
 
                 entity.Property(e => e.State)
