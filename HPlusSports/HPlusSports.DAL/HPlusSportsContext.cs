@@ -105,11 +105,11 @@ namespace HPlusSports.DAL
                     .HasColumnName("ProductCode")
                     .HasMaxLength(10);
 
-                entity.HasDiscriminator<bool>("Perishable")
+                entity.HasDiscriminator<bool?>("Perishable")
                 .HasValue<Product>(false)
                 .HasValue<PerishableProduct>(true);
 
-                entity.Property<bool>("Perishable").HasDefaultValueSql("0");
+                entity.Property<bool?>("Perishable").HasDefaultValueSql("0");
 
                 entity.Property(e => e.Price).HasColumnType("money");
 
