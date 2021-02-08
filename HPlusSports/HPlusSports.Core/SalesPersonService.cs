@@ -31,7 +31,7 @@ namespace HPlusSports.Core
             var existingSalesperson = await _salesRepo.GetByID(person.Id);
 
             existingSalesperson.PropertyChanged += (sender, e) => 
-                Debug.WriteLine(e.PropertyName + " updated");
+                Debug.WriteLine($"User {(sender as Salesperson).Id} {e.PropertyName} updated");
 
             existingSalesperson.FirstName = person.FirstName;
             existingSalesperson.LastName = person.LastName;
