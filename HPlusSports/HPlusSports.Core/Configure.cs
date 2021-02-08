@@ -8,7 +8,16 @@ namespace HPlusSports.Core
     {
         public static void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IOrderService, OrderService>();
+            services.AddTransient<IOrderService, OrderService>((serviceProvider) => 
+            {
+                var os = new OrderService( 
+                    serviceProvider.GetService<DAL.IOrderRepository>(),
+                    serviceProvider.GetService<DAL.HPlusSportsContext>());
+                
+                os.OrderCreated += serviceProvider.GetService<IUserNotifier>().NotifyUser;
+
+                return os;
+            });
             services.AddTransient<ISalesPersonService, SalesPersonService>();
 
             services.AddTransient<IUserNotifier>((IServiceProvider serviceProvider) =>

@@ -12,15 +12,15 @@ namespace HPlusSports.Core
     {
         IOrderRepository _orderRepo;
         HPlusSportsContext _context;
-        IUserNotifier _userNotifier;    
+         
+        public delegate void OrderCreatedEvent(int userId);
+        public event OrderCreatedEvent OrderCreated;
 
         public OrderService(IOrderRepository orderRepo, 
-                            HPlusSportsContext context, 
-                            IUserNotifier notifier) 
+                            HPlusSportsContext context) 
         {
             _orderRepo = orderRepo;
             _context = context;
-            _userNotifier = notifier;
         }
 
         public async Task<IList<Order>> GetCustomerOrders(int CustomerId)
@@ -59,7 +59,7 @@ namespace HPlusSports.Core
             });
 
             await _context.SaveChangesAsync();
-            _userNotifier.NotifyUser(customerId); 
+            OrderCreated?.Invoke(customerId);
             return order;
         }
 
