@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/HPlusSports.Web/bin/Debug/netcoreapp3.1/HPlusSports.Web.dll",
+            "program": "${workspaceFolder}/HPlusSports.Web/bin/Debug/net5.0/HPlusSports.Web.dll",
             "args": [],
             "cwd": "${workspaceFolder}/HPlusSports.Web",
             "stopAtEntry": false,
