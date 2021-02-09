@@ -12,12 +12,12 @@ namespace HPlusSports.Core
     {
         IOrderRepository _orderRepo;
         HPlusSportsContext _context;
-         
+
         public delegate void OrderCreatedEvent(int userId);
         public event OrderCreatedEvent OrderCreated;
 
-        public OrderService(IOrderRepository orderRepo, 
-                            HPlusSportsContext context) 
+        public OrderService(IOrderRepository orderRepo,
+                            HPlusSportsContext context)
         {
             _orderRepo = orderRepo;
             _context = context;
@@ -52,16 +52,16 @@ namespace HPlusSports.Core
 
         public NewOrderInformationBuilder StartOrder(int CustomerId, int SalesPersonId)
         {
-            var builder = new NewOrderInformationBuilder();
-            builder.CustomerId = CustomerId;
-            builder.SalesPersonId = SalesPersonId;
+            var builder = new NewOrderInformationBuilder()
+                    .ConfigurePricing(GetPriceWithDiscounts)
+                    .ForUser(CustomerId)
+                    .SoldBy(SalesPersonId);
+
             return builder;
         }
 
         public async Task<Order> CompleteOrder(NewOrderInformationBuilder builder)
         {
-            builder.products.ForEach(p => p.Price = GetPriceWithDiscounts(p.ProductCode, p.Quantity));
-            
             var order = _orderRepo.Create(builder);
 
             await _context.SaveChangesAsync();
