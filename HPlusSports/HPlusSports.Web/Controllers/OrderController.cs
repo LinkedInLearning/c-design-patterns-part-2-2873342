@@ -63,7 +63,6 @@ namespace HPlusSports.Web.Controllers
         public async Task<ActionResult> CreateOrder(CreateOrderViewModel order)
         {
             var orderBuilder = _orderService.StartOrder(order.CustomerId, order.SalesPersonId);
-            
 
             order.SelectedProductCodes.ForEach(pc => orderBuilder.OrderProduct(new ProductOrderInformation(){ ProductCode = pc, Quantity = 1}));
 
