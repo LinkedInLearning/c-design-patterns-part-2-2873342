@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using HPlusSports.Models;
 using System;
+using HPlusSports.DAL;
 
 namespace HPlusSports.Core
 {
@@ -9,6 +10,7 @@ namespace HPlusSports.Core
     {
         Task<IList<Order>> GetCustomerOrders(int CustomerId);
         Task<IList<Order>> GetOrdersWithCustomers();
-        Task<Order> CreateOrder(int customerId, int salesPersonId, List<Tuple<string, int>> productsQuantities);
+        NewOrderInformationBuilder StartOrder(int CustomerId, int SalesPersonId); 
+        Task<Order> CompleteOrder(NewOrderInformationBuilder builder);
     }
 }
