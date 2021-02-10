@@ -8,7 +8,7 @@ namespace Proxy
     {
         static void Main(string[] args)
         {            
-            Parallel.For(0,10, i => OneFileAtATimeProxy.AppendAllTextAsync("A.txt", i+", "));
+            Parallel.For(0,10, i => OneFileAtATimeProxy.AppendAllText("A.txt", i+", "));
         }
     }
 
@@ -16,12 +16,13 @@ namespace Proxy
     {
         static readonly object FileInUse = new object();
 
-        public static Task AppendAllTextAsync(string filename, string text)
+        public static void AppendAllText(string filename, string text)
         {
             lock(FileInUse)
             { 
-                return File.AppendAllTextAsync(filename, text);                
+                File.AppendAllText(filename, text);                
             }
+            
         } 
     }
    
