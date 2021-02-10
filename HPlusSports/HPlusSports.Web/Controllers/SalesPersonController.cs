@@ -9,6 +9,7 @@ using HPlusSports.Web.ViewModels;
 using HPlusSports.Models;
 using HPlusSports.DAL;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using HPlusSports.Core.Commands;
 
 namespace HPlusSports.Web.Controllers
 {
@@ -38,7 +39,12 @@ namespace HPlusSports.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> Edit(EditSalespersonViewModel vm)
         {
-            await _salesPersonService.UpdateSalesPersonContact(vm.GetPerson());
+            var command = new UpdateSalesPersonCommand(vm.GetPerson(), _salesPersonRepo);
+
+            ModelState.AddModelError("","Check your field values");
+            if (!await command.CanInvoke()) return View(vm);
+
+            await command.Invoke();
 
             return Redirect("/SalesPerson/Index");
         }

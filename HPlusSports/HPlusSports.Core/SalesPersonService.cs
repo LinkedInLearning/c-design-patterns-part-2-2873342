@@ -25,22 +25,5 @@ namespace HPlusSports.Core
             _salesRepo.Save(person);
             await _salesRepo.SaveChanges();
         }
-
-        public async Task UpdateSalesPersonContact(Salesperson person)
-        {
-            var existingSalesperson = await _salesRepo.GetByID(person.Id);
-
-            existingSalesperson.PropertyChanged += (sender, e) => 
-                Debug.WriteLine($"User {(sender as Salesperson).Id} {e.PropertyName} updated");
-
-            existingSalesperson.FirstName = person.FirstName;
-            existingSalesperson.LastName = person.LastName;
-            existingSalesperson.Email = person.Email;
-            existingSalesperson.Phone = person.Phone;
-
-            _salesRepo.Save(existingSalesperson);
-            await _salesRepo.SaveChanges();
-        }
-
     }
 }
