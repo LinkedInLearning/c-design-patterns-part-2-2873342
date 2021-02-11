@@ -11,7 +11,7 @@ namespace HPlusSports.Core
         {
             services.AddMemoryCache();
 
-            services.AddTransient<IOrderService, CachingOrderService>((serviceProvider) => 
+            services.AddTransient<IOrderService, OrderService>((serviceProvider) => 
             {
                 var os = new OrderService( 
                     serviceProvider.GetService<DAL.IOrderRepository>(),
@@ -19,8 +19,11 @@ namespace HPlusSports.Core
                 
                 os.OrderCreated += serviceProvider.GetService<IUserNotifier>().NotifyUser;
 
-                return new CachingOrderService(os, serviceProvider.GetService<IMemoryCache>());
+                return os;
             });
+
+            services.AddTransient<ISimpleCachingOrderService, SimpleCachingOrderService>();
+
             services.AddTransient<ISalesPersonService, SalesPersonService>();
 
             services.AddTransient<IUserNotifier>((IServiceProvider serviceProvider) =>

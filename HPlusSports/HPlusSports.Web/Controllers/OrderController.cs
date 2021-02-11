@@ -14,11 +14,11 @@ namespace HPlusSports.Web.Controllers
 {
     public class OrderController : Controller
     {
-        IOrderService _orderService;
+        ISimpleCachingOrderService _orderService;
         IRepository<Customer> _customerRepo;
         IRepository<Product> _productRepo;
         ISalesPersonRepository _salesRepo;
-        public OrderController(IOrderService orderService, IRepository<Customer> customerRepo, IRepository<Product> productRepo, ISalesPersonRepository salesRepo)
+        public OrderController(ISimpleCachingOrderService orderService, IRepository<Customer> customerRepo, IRepository<Product> productRepo, ISalesPersonRepository salesRepo)
         {
             _orderService = orderService;
             _customerRepo = customerRepo;
@@ -62,11 +62,7 @@ namespace HPlusSports.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateOrder(CreateOrderViewModel order)
         {
-            var orderBuilder = _orderService.StartOrder(order.CustomerId, order.SalesPersonId);
-
-            order.SelectedProductCodes.ForEach(pc => orderBuilder.OrderProduct(new ProductOrderInformation(){ ProductCode = pc, Quantity = 1}));
-
-            await _orderService.CompleteOrder(orderBuilder);
+            await _orderService.CreateOrder(order.CustomerId, order.SalesPersonId, order.SelectedProductCodes);
             return Redirect("Index");
         }
 
