@@ -50,7 +50,7 @@ namespace ListResponsibilityChain
             if (FirstHandler == null)
                 FirstHandler = LastHandler = newHandler;
             else
-                LastHandler.Next = newHandler;
+                LastHandler = LastHandler.Next = newHandler;
             return this;
         }
 
