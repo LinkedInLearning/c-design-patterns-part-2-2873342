@@ -62,16 +62,17 @@ namespace HPlusSports.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateOrder(CreateOrderViewModel order)
         {
-            var builder  = _orderService.StartOrder(order.CustomerId, order.SalesPersonId);
+            var orderBuilder = _orderService.StartOrder(order.CustomerId, order.SalesPersonId); 
+             
+            order.SelectedProductCodes
+                .ForEach(pc => orderBuilder
+                    .OrderProduct(
+                        new ProductOrderInformation(){ ProductCode = pc, Quantity = 1}
+                    )
+                ); 
+ 
+            await _orderService.CompleteOrder(orderBuilder);
 
-            builder.products = 
-                order.SelectedProductCodes.Select(pc => {
-                    return new ProductOrderInformation(){ ProductCode = pc, Quantity = 1};
-                })
-                .ToList();
-
-            await _orderService.CompleteOrder(builder);
-            
             return Redirect("Index");
         }
 
