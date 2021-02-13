@@ -30,26 +30,9 @@ namespace HPlusSports.DAL
                 .ToListAsync();
         }
 
-        public Order Create(NewOrderInformation orderInfo)
+        public Order Create(NewOrderInformationBuilder orderInfo)
         {
-            var order = new Order()
-            {
-                CustomerId = orderInfo.CustomerId,
-                SalespersonId = orderInfo.SalesPersonId,
-                Status = "due",
-                TotalDue = orderInfo.products.Sum(p => p.Price * p.Quantity),
-                CreatedDate = DateTime.Now,
-                OrderDate = DateTime.Now,
-                OrderItem = orderInfo.products.Select(p =>
-                    {
-                        return new OrderItem()
-                        {
-                            ProductId = p.ProductCode,
-                            Quantity = p.Quantity
-                        };
-                    }).ToList()
-                  
-            };
+            var order = orderInfo.Build();
 
             _context.Add(order);
 

@@ -40,30 +40,6 @@ namespace HPlusSports.Core
                 .ToListAsync();
         }
 
-        public async Task<Order> CreateOrder(int customerId, int salesPersonId, List<Tuple<string, int>> productsQuantities)
-        {
-            var order = _orderRepo.Create(new NewOrderInformation()
-            {
-                CustomerId = customerId,
-                SalesPersonId = salesPersonId,
-                products = productsQuantities.Select(p =>
-                {
-                    return new ProductOrderInformation()
-                    {
-                        ProductCode = p.Item1,
-                        Quantity = p.Item2,
-                        Price = GetPriceWithDiscounts(p.Item1, p.Item2)
-                    };
-                }).ToList()
-            });
-
-            await _context.SaveChangesAsync();
-
-            OrderCreated?.Invoke(customerId);
-            
-            return order;
-        }
-
         private decimal GetPriceWithDiscounts(string productCode, int quantity)
         {
             var product = _context.Set<Product>().First(p => p.ProductCode == productCode);
@@ -72,6 +48,24 @@ namespace HPlusSports.Core
             else
                 return product.Price ?? 1;
 
+        }
+
+        public NewOrderInformationBuilder StartOrder(int CustomerId, int SalesPersonId)
+        {
+            var builder = new NewOrderInformationBuilder();
+            builder.CustomerId = CustomerId;
+            builder.SalesPersonId = SalesPersonId;
+            return builder;
+        }
+
+        public async Task<Order> CompleteOrder(NewOrderInformationBuilder builder)
+        {
+            builder.products.ForEach(p => p.Price = GetPriceWithDiscounts(p.ProductCode, p.Quantity));
+            var order = _orderRepo.Create(builder);
+
+            await _context.SaveChangesAsync();
+            OrderCreated?.Invoke(order.CustomerId);
+            return order;
         }
     }
 }
