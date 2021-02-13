@@ -1,14 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using HPlusSports.Core;
 using HPlusSports.Web.ViewModels;
-using HPlusSports.Models;
 using HPlusSports.DAL;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using HPlusSports.Core.Commands;
 
 namespace HPlusSports.Web.Controllers
 {
@@ -38,8 +33,12 @@ namespace HPlusSports.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> Edit(EditSalespersonViewModel vm)
         {
-            await _salesPersonService.UpdateSalesPersonContact(vm.GetPerson());
-
+            var command = new UpdateSalesPersonCommand(vm.GetPerson(), _salesPersonRepo);
+            if (!await command.CanUpdate()){
+                ModelState.AddModelError("","Check your field values");
+                return View(vm);
+            }
+            await command.Update();
             return Redirect("/SalesPerson/Index");
         }
 
