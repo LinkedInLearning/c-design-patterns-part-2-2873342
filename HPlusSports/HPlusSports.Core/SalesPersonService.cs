@@ -1,5 +1,6 @@
 ﻿using HPlusSports.DAL;
 using HPlusSports.Models;
+using System;
 using System.Threading.Tasks;
 
 namespace HPlusSports.Core
@@ -27,7 +28,11 @@ namespace HPlusSports.Core
         public async Task UpdateSalesPersonContact(Salesperson person)
         {
             var existingSalesperson = await _salesRepo.GetByID(person.Id);
-
+            
+            existingSalesperson.PropertyChanged += (sender, e) => 
+                Console.WriteLine( 
+                    $"User {(sender as Salesperson).Id} {e.PropertyName} updated"); 
+ 
             existingSalesperson.FirstName = person.FirstName;
             existingSalesperson.LastName = person.LastName;
             existingSalesperson.Email = person.Email;
