@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -8,7 +9,8 @@ namespace HPlusSports.Core
     {
         public static void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IOrderService, OrderService>((serviceProvider) =>  
+            services.AddMemoryCache();
+            services.AddTransient<IOrderService, CachingOrderService>((serviceProvider) =>  
             { 
                 var os = new OrderService(  
                     serviceProvider.GetService<DAL.IOrderRepository>(), 
@@ -16,7 +18,7 @@ namespace HPlusSports.Core
                  
                 os.OrderCreated += serviceProvider.GetService<IUserNotifier>().NotifyUser; 
  
-                return os; 
+                return new CachingOrderService(os, serviceProvider.GetService<IMemoryCache>()); 
             }); 
             services.AddTransient<ISalesPersonService, SalesPersonService>();
 
