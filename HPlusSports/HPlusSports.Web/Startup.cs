@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using HPlusSports.Filters;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,7 +25,7 @@ namespace HPlusSports.Web
             Core.Configure.ConfigureServices(services);
           
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc(options => options.Filters.Add<LogPerformanceFilter>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
