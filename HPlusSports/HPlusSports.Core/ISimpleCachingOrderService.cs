@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using HPlusSports.Models;
-using System;
-using HPlusSports.DAL;
 
 namespace HPlusSports.Core
 {
