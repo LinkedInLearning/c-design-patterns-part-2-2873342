@@ -10,7 +10,8 @@ namespace ListResponsibilityChain
 
             var reader = new ListReader()
                 .AddHandler(new ConsoleItemHandler())
-                .AddHandler(new FileWritingItemHandler());
+                .AddHandler(new FileWritingItemHandler())
+                .AddHandler(new ConsoleItemHandler());
 
             reader.ReadList();
         }
