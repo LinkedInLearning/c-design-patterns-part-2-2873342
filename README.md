@@ -1,39 +1,39 @@
-# COURSENAME
-This is the repository for the LinkedIn Learning course `course-name`. The full course is available from [LinkedIn Learning][lil-course-url].
+# C#: Design Patterns Part 2
+This is the repository for the LinkedIn Learning course C#: Design Patterns Part 2. The full course is available from [LinkedIn Learning][lil-course-url].
 
-![course-name-alt-text][lil-thumbnail-url] 
+![C#: Design Patterns Part 2][lil-thumbnail-url] 
+Design patterns in C# can save you a lot of time, as you don’t have to recreate code that has already been proven. In this course, instructor Richard Goforth explains what design patterns are and how you can recognize and implement five C# patterns: Observer, Builder, Command, Proxy, and Chain of Responsibility. For each pattern, Richard gives a definition, at least one example of how to implement or use it, any other explanations you may need, and a practice challenge. He concludes with some suggestions on where to continue your education in C# application design with patterns.
 
-Design patterns are an important part of programming. Rather than programming solutions to every issue from scratch, developers can implement these patterns that solve common problems. In this course, instructor Richard Goforth explains the purpose and effective use of key design patterns in C#. Richard begins by discussing why design patterns make sense, what they are, and how they are grouped and categorized. He then provides an overview of the creational, behavioral, and structural Gang of Four design patterns and how they are applied in C# and .NET. Next, he takes a deeper dive into the Observer, Builder, Command, Proxy, and Chain of Responsibility Patterns providing hands-on challenges that help you master the application of these patterns in your own code.
+## Instructions
+This repository has branches for each of the videos in the course. You can use the branch pop up menu in github to switch to a specific branch and take a look at the course at that stage, or you can add `/tree/BRANCH_NAME` to the URL to go to the branch you want to access.
 
 There are several applicaitons in this repository.  Carried from the first part of the course are simple console examples in the folders Iterator, Adapter, and Factory.  There are similar folders for the patterns covered in this course, Observer, Builder, Command, Proxy, and ChainOfResponsibility. 
 
 Another application, HPlusSports, is a sample of a more robust web application in ASP.Net core, to give a different example of using each of the patterns in a more realistic situation.  It is more complex than an application of similar functionality would be to show examples of architecture in a more fully featured, long term support application.
 The web application is using an EF Core Backend to a SQLite Database file, to simplify running the application locally.
 
-_See the readme file in the main branch for updated instructions and information._
-## Instructions
-This repository has branches for each of the videos in the course. You can use the branch pop up menu in github to switch to a specific branch and take a look at the course at that stage, or you can add `/tree/BRANCH_NAME` to the URL to go to the branch you want to access.
-
 ## Branches
 The branches are structured to correspond to the videos in the course. The naming convention is `CHAPTER#_MOVIE#`. As an example, the branch named `02_03` corresponds to the second chapter and the third video in that chapter. 
 Some branches will have a beginning and an end state. These are marked with the letters `b` for "beginning" and `e` for "end". The `b` branch contains the code as it is at the beginning of the movie. The `e` branch contains the code as it is at the end of the movie. The `main` branch holds the final state of the code when in the course.
 
-## Installing
-1. To use these exercise files, you must have the following installed:
-	- [list of requirements for course]
-2. Clone this repository into your local machine using the terminal (Mac), CMD (Windows), or a GUI tool like SourceTree.
-3. [Course-specific instructions]
+When switching from one exercise files branch to the next after making changes to the files, you may get a message like this:
+
+    error: Your local changes to the following files would be overwritten by checkout:        [files]
+    Please commit your changes or stash them before you switch branches.
+    Aborting
+
+To resolve this issue:
+	
+    Add changes to git using this command: git add .
+	Commit changes using this command: git commit -m "some message"
 
 ### Instructor
 
 **Richard Goforth**
 
-_Software Architect and Consultant_
+__Software Architect and Consultant__
 
-Check out some of my other courses on [LinkedIn Learning](https://www.linkedin.com/learning/instructors/richard-goforth).
+Check out my other courses on [LinkedIn Learning](https://www.linkedin.com/learning/instructors/richard-goforth?u=104).
 
-[0]: # (Replace these placeholder URLs with actual course URLs)
-
-[lil-course-url]: https://www.linkedin.com/learning/
-[lil-thumbnail-url]: http://
-
+[lil-course-url]: https://www.linkedin.com/learning/c-sharp-design-patterns-part-2-8579116
+[lil-thumbnail-url]: https://cdn.lynda.com/course/2873342/2873342-1618509675364-16x9.jpg
